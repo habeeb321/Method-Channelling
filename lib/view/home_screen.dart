@@ -1,13 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
   @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  var channel = const MethodChannel("Habeeb");
+  showToast() {
+    channel.invokeMethod("ShowToast");
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
+      backgroundColor: Colors.amber,
       body: Center(
-        child: Text('Home Screen'),
+        child: 
+        ElevatedButton(
+          onPressed: () {
+            showToast();
+          },
+          child: const Text('Show Toast'),
+        ),
       ),
     );
   }
